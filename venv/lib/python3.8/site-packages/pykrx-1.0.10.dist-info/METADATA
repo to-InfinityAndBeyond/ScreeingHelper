@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: pykrx
+Version: 1.0.10
+Summary: KRX data scraping
+Home-page: https://github.com/sharebook-kr/pykrx
+Author: Brayden Jo, Jonghun Yoo
+Author-email: brayden.jo@outlook.com, jonghun.yoo@outlook.com, pystock@outlook.com
+License: MIT
+Platform: UNKNOWN
+Requires-Python: >=3
+Requires-Dist: requests
+Requires-Dist: pandas
+Requires-Dist: datetime
+Requires-Dist: numpy
+Requires-Dist: xlrd
+Requires-Dist: deprecated
+
+UNKNOWN
+
+
