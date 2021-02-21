@@ -21,7 +21,7 @@ if __name__ == '__main__':
         else:
             roe = (dict(value)['PBR'] / dict(value)['PER']) * 100
 
-        collection.insert_one({"_id": key, "BPS": dict(value)['BPS'],
+        collection.insert_one({"_id": key, "name": stock.get_market_ticker_name(key), "BPS": dict(value)['BPS'],
                                "PER": dict(value)['PER'], "PBR": dict(value)['PBR'],
                                "EPS": dict(value)['EPS'], "DIV": dict(value)['DIV'],
                                "DPS": dict(value)['DPS'],

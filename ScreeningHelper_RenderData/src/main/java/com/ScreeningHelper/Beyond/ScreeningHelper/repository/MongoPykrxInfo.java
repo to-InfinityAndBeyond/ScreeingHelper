@@ -8,6 +8,7 @@ public class MongoPykrxInfo {
 
     @Id
     private String id;
+    private String name;
     private double BPS;
     private double PER;
     private double PBR;
@@ -22,6 +23,14 @@ public class MongoPykrxInfo {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getBPS() {

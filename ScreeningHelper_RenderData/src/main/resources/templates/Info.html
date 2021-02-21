@@ -12,6 +12,7 @@
             </thead>
             <tr>
                 <th>종목코드</th>
+                <th>종목명</th>
                 <th>BPS</th>
                 <th>PER</th>
                 <th>PBR</th>
@@ -23,6 +24,7 @@
             <tbody>
             <tr th:each="pykrxInfo : ${pykrxInfo}">
                 <td th:text="${pykrxInfo.id}"></td>
+                <td th:text="${pykrxInfo.name}"></td>
                 <td th:text="${pykrxInfo.BPS}"></td>
                 <td th:text="${pykrxInfo.PER}"></td>
                 <td th:text="${pykrxInfo.PBR}"></td>
