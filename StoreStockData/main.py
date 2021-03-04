@@ -5,8 +5,8 @@ import datetime
 
 # 스크립트를 실행하려면 여백의 녹색 버튼을 누릅니다.
 if __name__ == '__main__':
-    date = "20210225"
-
+    now = datetime.datetime.now()
+    date = now.strftime("%Y%m%d")
     client = MongoClient("mongodb://localhost:27017/")
     db = client['test']
     collection = db['pykrxInfo']
@@ -15,20 +15,17 @@ if __name__ == '__main__':
     # collection.drop()
     # collection_sv.drop()
 
-    df = stock.get_market_fundamental_by_ticker(date)
-    df_dict = df.to_dict("index")
-
-    df_sv = stock.get_market_ohlcv_by_ticker(date)
-    df_sv_dict = df_sv.to_dict("index")
-
     # Date
-    now = datetime.datetime.now()
     prevDay = now.day
     prevMin = now.minute
+    prevSec = now.second
     day = 0
     min = 0
+    sec = 0
     while(1):
         if(prevDay != day):
+            df = stock.get_market_fundamental_by_ticker(date)
+            df_dict = df.to_dict("index")
             for key in dict(df_dict).keys():
                 value = df_dict[key]
                 #value_sv = df_sv_dict[key]
@@ -47,7 +44,9 @@ if __name__ == '__main__':
             prevDay = now.day
             print("PYKRX INFO Updated", prevDay, day)
 
-        if(prevMin != min):
+        if(prevSec != sec):
+            df_sv = stock.get_market_ohlcv_by_ticker(date)
+            df_sv_dict = df_sv.to_dict("index")
             for key in dict(df_sv_dict).keys():
                 value = df_sv_dict[key]
 
@@ -56,12 +55,14 @@ if __name__ == '__main__':
                                        "highPrice": dict(value)['고가'], "lowPrice": dict(value)['저가'],
                                        "endPrice": dict(value)['종가'], "volume": dict(value)['거래량'],
                                        "transaction": dict(value)['거래대금'], "fluctuation": dict(value)['등락률']}})
-            prevMin = now.minute
-            print("PYKRX SV Updated" ,prevMin ,min)
+            prevSec = now.second
+            print("PYKRX SV Updated" ,prevSec ,sec)
 
         now = datetime.datetime.now()
         day = now.day
         min = now.minute
+        sec = now.second
+
 
 
     # cursor = collection.find({})
