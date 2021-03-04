@@ -3,17 +3,25 @@ package com.ScreeningHelper.Beyond.ScreeningHelper.service;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoPykrxInfo;
+import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoPykrxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PykrxInfoService {
 //    MongoRepository mongoRepository;
     MongoTemplate mongoTemplate;
+
+    @Autowired
+    public MongoPykrxRepository mongoPykrxRepository;
+
+    public void printById(String id) {
+        Optional<MongoPykrxInfo> mongoPykrxInfo = mongoPykrxRepository.findById(id);
+    }
 
     @Autowired
 //    public void setMongoRepository(MongoRepository mongoRepository) {

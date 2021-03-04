@@ -9,25 +9,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PykrxInfoController {
 
     private PykrxInfoService prkrxInfoService;
     private StockValueService stockValueService;
+    private List<MongoPykrxInfo> mongoPykrxInfos;
 
     @Autowired
     public void setPykrxInfoService(PykrxInfoService pykrxInfoService, StockValueService stockValueService) {
         this.prkrxInfoService = pykrxInfoService;
         this.stockValueService = stockValueService;
+        this.mongoPykrxInfos = prkrxInfoService.selectPykrxInfo();
     }
 
     // read pykrx
     @RequestMapping(value = "/Info/read")
     public String stockRead(Model model) {
-        List<MongoPykrxInfo> mongoPykrxInfos = prkrxInfoService.selectPykrxInfo();
+        mongoPykrxInfos = prkrxInfoService.selectPykrxInfo();
+        prkrxInfoService.printById(mongoPykrxInfos.get(0).getId());
         model.addAttribute("pykrxInfo", mongoPykrxInfos);
         return "updateStock";
     }
@@ -44,7 +47,7 @@ public class PykrxInfoController {
     // update StockValue
     @RequestMapping(value = "/Info/update/sv", method=RequestMethod.POST)
     public String stockUpdate_sv(Model model) {
-        List<MongoStockValue> mongoStockValues = stockValueService.selectStockValue();
+        List<MongoStockValue>  mongoStockValues = stockValueService.selectStockValue(mongoPykrxInfos);
         System.out.print("/");
         model.addAttribute("stockValue", mongoStockValues);
         return "updateStock :: #stockList_sv";
