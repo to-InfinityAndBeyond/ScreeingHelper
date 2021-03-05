@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoPykrxInfo;
 import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoPykrxRepository;
+import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoStockValue;
+import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoStockValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class PykrxInfoService {
 
     @Autowired
     public MongoPykrxRepository mongoPykrxRepository;
+
+    @Autowired
+    public MongoStockValueRepository mongoStockValueRepository;
 
     public void printById(String id) {
         Optional<MongoPykrxInfo> mongoPykrxInfo = mongoPykrxRepository.findById(id);
@@ -37,6 +42,10 @@ public class PykrxInfoService {
 //    }
     public List<MongoPykrxInfo> selectPykrxInfo() {
         List<MongoPykrxInfo> mongoPykrxInfoList = mongoTemplate.findAll(MongoPykrxInfo.class);
+        for(MongoPykrxInfo mongoPykrxInfo: mongoPykrxInfoList) {
+            String id = mongoPykrxInfo.getId();
+            mongoPykrxInfo.setMongoStockValue((mongoStockValueRepository.findById(id)).orElse(new MongoStockValue()));
+        }
         Collections.sort(mongoPykrxInfoList, new Comparator<MongoPykrxInfo>() {
             @Override
             public int compare(MongoPykrxInfo o1, MongoPykrxInfo o2) {

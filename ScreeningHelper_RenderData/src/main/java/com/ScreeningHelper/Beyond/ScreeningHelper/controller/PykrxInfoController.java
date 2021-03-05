@@ -26,13 +26,28 @@ public class PykrxInfoController {
         this.mongoPykrxInfos = prkrxInfoService.selectPykrxInfo();
     }
 
-    // read pykrx
+    // read All Stock Data
     @RequestMapping(value = "/Info/read")
     public String stockRead(Model model) {
         mongoPykrxInfos = prkrxInfoService.selectPykrxInfo();
-        prkrxInfoService.printById(mongoPykrxInfos.get(0).getId());
         model.addAttribute("pykrxInfo", mongoPykrxInfos);
         return "updateStock";
+    }
+
+    // read only Pykrx Info
+    @RequestMapping(value = "/Info/pykrxInfo/read")
+    public String pykrxRead(Model model) {
+        mongoPykrxInfos = prkrxInfoService.selectPykrxInfo();
+        model.addAttribute("pykrxInfo", mongoPykrxInfos);
+        return "PykrxInfo";
+    }
+
+    // read only Pykrx Info
+    @RequestMapping(value = "/Info/stockValue/read")
+    public String stockValueRead(Model model) {
+        List<MongoStockValue>  mongoStockValues = stockValueService.selectStockValue(mongoPykrxInfos);
+        model.addAttribute("stockValue", mongoStockValues);
+        return "StockValue";
     }
 
     // update pykrxInfo
@@ -51,5 +66,21 @@ public class PykrxInfoController {
         System.out.print("/");
         model.addAttribute("stockValue", mongoStockValues);
         return "updateStock :: #stockList_sv";
+    }
+
+    // update Only StockValue
+    @RequestMapping(value = "/Info/update/only/sv", method=RequestMethod.POST)
+    public String onlystockUpdate_sv(Model model) {
+        List<MongoStockValue>  mongoStockValues = stockValueService.selectStockValue(mongoPykrxInfos);
+        model.addAttribute("stockValue", mongoStockValues);
+        return "StockValue :: #stockList_sv";
+    }
+
+    // update pykrxInfo
+    @RequestMapping(value = "/Info/update/only", method=RequestMethod.POST)
+    public String onlystockUpdate(Model model) {
+        List<MongoPykrxInfo> mongoPykrxInfos = prkrxInfoService.selectPykrxInfo();
+        model.addAttribute("pykrxInfo", mongoPykrxInfos);
+        return "PykrxInfo :: #stockList";
     }
 }

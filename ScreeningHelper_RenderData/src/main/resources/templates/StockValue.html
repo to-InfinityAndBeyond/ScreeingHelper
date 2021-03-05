@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <title>Stock</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+    <script type="text/javascript">
+        function ajaxUpdate_sv(){
+            $.ajax({
+                url : "/Info/update/only/sv",
+                type : "POST",
+                success : function(data) {
+                  //alert(data);
+                  $('#stockList_sv').replaceWith(data);
+                },
+                error : function(data) {
+                  alert(data);
+                  clearInterval(playTimer);
+                }
+          });
+        }
+        $(document).ready(function(){
+            playTimer = setInterval(function() {
+                ajaxUpdate_sv();
+            }, 1000);
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div id="stockList_sv">
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>STOCK VALUE</th> </tr>
+            </thead>
+            <tr>
+                <th>Code</th>
+                <th>Cur. Price</th>
+                <th>High Price</th>
+                <th>Low Price</th>
+                <th>End Price</th>
+                <th>Volume</th>
+                <th>Transaction</th>
+                <th>Fluctuation</th>
+            </tr>
+            <tbody>
+            <tr th:each="stockValue : ${stockValue}">
+                <td th:text="${stockValue.id}"></td>
+                <td th:text="${stockValue.curPrice}"></td>
+                <td th:text="${stockValue.highPrice}"></td>
+                <td th:text="${stockValue.lowPrice}"></td>
+                <td th:text="${stockValue.endPrice}"></td>
+                <td th:text="${stockValue.volume}"></td>
+                <td th:text="${stockValue.transaction}"></td>
+                <td th:text="${stockValue.fluctuation}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
