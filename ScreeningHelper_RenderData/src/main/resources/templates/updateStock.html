@@ -13,7 +13,7 @@
                   $('#stockList').replaceWith(data);
                 },
                 error : function(data) {
-                  alert(data);
+                  alert("관리자문의 #DBERROR_US");
                   clearInterval(playTimer);
                 }
           });
@@ -27,7 +27,7 @@
                   $('#stockList_sv').replaceWith(data);
                 },
                 error : function(data) {
-                  alert(data);
+                  alert("관리자문의 #DBERROR_US_SV");
                   clearInterval(playTimer);
                 }
           });
