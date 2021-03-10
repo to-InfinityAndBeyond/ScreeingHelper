@@ -1,14 +1,14 @@
 package com.ScreeningHelper.Beyond.ScreeningHelper.service;
 
 import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoPykrxInfo;
+import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoPykrxRepository;
 import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoStockValue;
+import com.ScreeningHelper.Beyond.ScreeningHelper.repository.MongoStockValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StockValueService {
@@ -20,8 +20,20 @@ public class StockValueService {
         this.mongoTemplate = mongoTemplate;
     }
 
-    public List<MongoStockValue> selectStockValue() {
-        List<MongoStockValue> mongoStockValues = mongoTemplate.findAll(MongoStockValue.class);
+    @Autowired
+    public MongoStockValueRepository mongoStockValueRepository;
+
+    public void printById(String id) {
+        Optional<MongoStockValue> mongoStockValue = mongoStockValueRepository.findById(id);
+    }
+
+    public List<MongoStockValue>  selectStockValue(List<MongoPykrxInfo> mongoPykrxInfos) {
+        List<MongoStockValue> mongoStockValues = new ArrayList<>();
+        for(MongoPykrxInfo info: mongoPykrxInfos) {
+            mongoStockValues.add((mongoStockValueRepository.findById(info.getId())).orElse(new MongoStockValue()));
+        }
+
+
 //        Collections.sort(mongoStockValues, new Comparator<MongoStockValue>() {
 //            @Override
 //            public int compare(MongoPykrxInfo o1, MongoPykrxInfo o2) {

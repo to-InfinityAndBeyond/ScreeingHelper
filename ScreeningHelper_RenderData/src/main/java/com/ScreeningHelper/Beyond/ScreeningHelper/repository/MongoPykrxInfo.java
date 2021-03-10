@@ -1,7 +1,10 @@
 package com.ScreeningHelper.Beyond.ScreeningHelper.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Optional;
 
 @Document(collection = "pykrxInfo")
 public class MongoPykrxInfo {
@@ -16,6 +19,7 @@ public class MongoPykrxInfo {
     private double DIV;
     private double DPS;
     private double ROE;
+    private MongoStockValue mongoStockValue;
 
     public String getId() {
         return id;
@@ -87,5 +91,13 @@ public class MongoPykrxInfo {
 
     public void setROE(double ROE) {
         this.ROE = ROE;
+    }
+
+    public MongoStockValue getMongoStockValue() {
+        return mongoStockValue;
+    }
+
+    public void setMongoStockValue(MongoStockValue mongoStockValue) {
+        this.mongoStockValue = mongoStockValue;
     }
 }

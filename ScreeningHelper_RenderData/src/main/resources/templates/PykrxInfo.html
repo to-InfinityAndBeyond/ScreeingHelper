@@ -6,28 +6,14 @@
     <script type="text/javascript">
         function ajaxUpdate(){
             $.ajax({
-                url : "/Info/update",
+                url : "/Info/update/only",
                 type : "POST",
                 success : function(data) {
                   //alert(data);
                   $('#stockList').replaceWith(data);
                 },
                 error : function(data) {
-                  alert("관리자문의 #DBERROR_US");
-                  clearInterval(playTimer);
-                }
-          });
-        }
-        function ajaxUpdate_sv(){
-            $.ajax({
-                url : "/Info/update/sv",
-                type : "POST",
-                success : function(data) {
-                  //alert(data);
-                  $('#stockList_sv').replaceWith(data);
-                },
-                error : function(data) {
-                  alert("관리자문의 #DBERROR_US_SV");
+                  alert("관리자문의 #DBERROR_PI");
                   clearInterval(playTimer);
                 }
           });
@@ -35,14 +21,13 @@
         $(document).ready(function(){
             playTimer = setInterval(function() {
                 ajaxUpdate();
-                ajaxUpdate_sv();
             }, 1000);
         });
     </script>
 </head>
 <body>
 <div class="container">
-    <h2># ALL STOCK INFO</h2>
+    <h2># PYKRX INFO</h2>
     <div id="stockList">
         <table>
             <tr>
@@ -55,13 +40,6 @@
                 <th>DIV</th>
                 <th>DPS</th>
                 <th>ROE</th>
-                <th>curPrice</th>
-                <th>highPrice</th>
-                <th>lowPrice</th>
-                <th>endPrice</th>
-                <th>Volume</th>
-                <th>Transaction</th>
-                <th>Fluctuation</th>
             </tr>
             <tbody>
             <tr th:each="pykrxInfo : ${pykrxInfo}">
@@ -74,13 +52,6 @@
                 <td th:text="${pykrxInfo.DIV}"></td>
                 <td th:text="${pykrxInfo.DPS}"></td>
                 <td th:text="${pykrxInfo.ROE}"></td>
-                <td th:text="${pykrxInfo.mongoStockValue.curPrice}"></td>
-                <td th:text="${pykrxInfo.mongoStockValue.highPrice}"></td>
-                <td th:text="${pykrxInfo.mongoStockValue.lowPrice}"></td>
-                <td th:text="${pykrxInfo.mongoStockValue.endPrice}"></td>
-                <td th:text="${pykrxInfo.mongoStockValue.volume}"></td>
-                <td th:text="${pykrxInfo.mongoStockValue.transaction}"></td>
-                <td th:text="${pykrxInfo.mongoStockValue.fluctuation}"></td>
             </tr>
             </tbody>
         </table>
