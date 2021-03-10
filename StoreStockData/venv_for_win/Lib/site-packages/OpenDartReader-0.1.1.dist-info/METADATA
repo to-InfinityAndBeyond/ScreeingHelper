@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: OpenDartReader
+Version: 0.1.1
+Summary: OpenDartReader (FSS DART Open API reader)
+Home-page: https://github.com/financedata/opendartreader
+Author: FinanceData.KR
+Author-email: plusjune@financedata.kr
+License: MIT License
+Keywords: data,finance,dart,fss
+Platform: UNKNOWN
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Cython
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Python: >=3
+Requires-Dist: pandas (>=0.19.2)
+Requires-Dist: requests (>=2.3.0)
+Requires-Dist: requests-file
+Requires-Dist: lxml
+
+UNKNOWN
+
+
