@@ -30,14 +30,21 @@ Helper for Screening stocks that have been underrated but expected. The base dat
 <br>
 |Name|Description|ex|
 |:----:|:----------:|:---:|
-|종목코드|||
-|BPS|||
-|PER|||
-|PBR|||
-|EPS|||
-|DIV|||
-|DPS|||
-|ROE|||  
+|종목코드|6 자리의 주식 고유코드||
+|BPS|주당순자산가치||
+|PER|주가수익률||
+|PBR|주가순자산비율||
+|EPS|주당순이익||
+|DIV|배당수익률||
+|DPS|주당배당금||
+|ROE|자기자본이익률||
+|curPrice|시가 : 금일 장 시작 주가 <br>(전일종가)||
+|highPrice|고가 : 금일 최고 주가||
+|lowPrice|저가 : 금일 최저 주가||
+|endPrice|종가 : 금일 마감 주가 <br>(당일 기준 현재가)||
+|Volume|거래량||
+|Transaction|거래대금||
+|Fluctuation|등락률||  
 
 <br>
 
@@ -49,12 +56,6 @@ Helper for Screening stocks that have been underrated but expected. The base dat
 
 |Name|Description|ex|
 |:----:|:----------:|:---:|
-|curPrice|||
-|highPrice|||
-|lowPrice|||
-|endPrice|||
-|Volume|||
-|Transaction|||
-|Fluctuation|||  
+
 
 
